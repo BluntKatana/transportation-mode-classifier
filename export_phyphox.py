@@ -76,7 +76,7 @@ class ExportPhyphoxData:
             combined_df.to_csv(f"{output_path}{label} {START_DATE}.csv", index=False)
 
         return combined_df
-    
+
     def combine_from_multiple_folders(self, label, folders_path, output_path = None):
         """
         Combine all the data from the phyphox folders into a single dataframe
