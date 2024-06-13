@@ -62,9 +62,12 @@ class ExportPhyphoxData:
         # Add some additional columns
         # - grab the start_date if it exists, otherwise use the first timestamp
         meta_data = pd.read_csv(folder_path + "meta/time.csv", delimiter=";")
-        START_DATE = "1970-01-01 00:00:00"
-        if "START_DATE" in meta_data.columns:
+        START_DATE = "1970-01-01 00:00:00.000 UTC+02:00"
+        # if "START_DATE" in meta_data.columns:
+        try:
             START_DATE = meta_data.iloc[0, 3]
+        except:
+            print("!! No start date found. Using default start date !!")
 
         combined_df["timestamp"] = pd.to_timedelta(combined_df["Time (s)"], unit='s') + pd.to_datetime(START_DATE)
         combined_df["transportation_mode"] = label
